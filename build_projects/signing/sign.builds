@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildProjectDirectory)\..\..\build_tools\Build.Common.props" />
-  <Import Project="$(MSBuildProjectDirectory)\..\..\build_tools\Build.Common.targets" />
+  <Import Project="$(MSBuildProjectDirectory)\..\..\build_tools\MicroBuild.Core.props" />
+  <Import Project="$(MSBuildProjectDirectory)\..\..\build_tools\MicroBuild.Core.targets" />
   <UsingTask AssemblyFile="$(BuildToolsTaskDir)Microsoft.DotNet.Build.Tasks.dll" TaskName="ReadSigningRequired" />
   <!-- populates item group FilesToSign with the list of files to sign -->
   <Target Name="GetFilesToSignItems">
@@ -16,7 +17,7 @@
   <Target Name="Build"
           Condition="'$(SkipSigning)' != 'true' and '$(SignType)' != 'oss'"
           DependsOnTargets="GetFilesToSignItems">
-          <Message Text="Signing files: @(SignMarkerFile)" />
+    <Message Text="Signing files: @(SignMarkerFile)" />
     <CallTarget Targets="SignFiles" />
     <!-- now that the files have been signed delete the marker files -->
     <Delete Files="@(SignMarkerFile)" />
