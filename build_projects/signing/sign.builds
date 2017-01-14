@@ -7,9 +7,6 @@
   <!-- populates item group FilesToSign with the list of files to sign -->
   <Target Name="GetFilesToSignItems">
     <!-- read all of the marker files and populate the FilesToSign item group -->
-    <PropertyGroup>
-      <BinariesDirectory>$(MSBuildProjectDirectory)\..\..\artifacts\win10-x64\stage2\sdk</BinariesDirectory>
-    </PropertyGroup>
     <ItemGroup>
       <SignMarkerFile Include="$(MSBuildProjectDirectory)\..\..\**\*.requires_signing" />
     </ItemGroup>
@@ -20,6 +17,9 @@
   <Target Name="Build"
           Condition="'$(SkipSigning)' != 'true' and '$(SignType)' != 'oss'"
           DependsOnTargets="GetFilesToSignItems">
+    <PropertyGroup>
+      <BinariesDirectory>$(MSBuildProjectDirectory)\..\..\artifacts\win10-x64\stage2\sdk</BinariesDirectory>
+    </PropertyGroup>
     <Message Text="Signing files: @(SignMarkerFile)" />
     <CallTarget Targets="SignFiles" />
     <!-- now that the files have been signed delete the marker files -->

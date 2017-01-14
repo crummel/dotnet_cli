@@ -16,6 +16,7 @@
     <ItemGroup>
       <FilesToSign Include="$(MSBuildProjectDirectory)\..\..\$(FilesToMark)" />
     </ItemGroup>
+    <Message Text="Searching $(MSBuildProjectDirectory)\..\..\$(FilesToMark)" />
     <Message Text="Signing files: @(FilesToSign)" />
     <WriteSigningRequired AuthenticodeSig="$(AuthenticodeSig)" 
                           StrongNameSig="$(StrongNameSig)"
@@ -45,12 +46,7 @@ AppDomain.CurrentDomain.AssemblyResolve += (sender, e) =>
   Console.WriteLine("Searching " + assemblySearchPath);
   if (File.Exists(assemblySearchPath)) 
   {
-    Console.WriteLine("Found");
     return Assembly.LoadFrom(assemblySearchPath);
-  }
-  else
-  {
-    Console.WriteLine("Not found");
   }
   return null;
 };
