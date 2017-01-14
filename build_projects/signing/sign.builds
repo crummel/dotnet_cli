@@ -17,9 +17,9 @@
           Condition="'$(SkipSigning)' != 'true' and '$(SignType)' != 'oss'"
           DependsOnTargets="GetFilesToSignItems">
           <Message Text="Signing files: @(SignMarkerFile)" />
-    <!-- <CallTarget Targets="SignFiles" /> -->
+    <CallTarget Targets="SignFiles" />
     <!-- now that the files have been signed delete the marker files -->
-    <!-- <Delete Files="@(SignMarkerFile)" /> -->
+    <Delete Files="@(SignMarkerFile)" />
   </Target>
   
 <!-- https://stackoverflow.com/questions/13548851/msbuild-usingtask-resolve-references -->
