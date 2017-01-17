@@ -8,7 +8,7 @@
   <UsingTask AssemblyFile="$(BuildToolsTaskDir)Microsoft.DotNet.Build.Tasks.dll" TaskName="ReadSigningRequired" />
   <PropertyGroup>
     <OutDir>$(MSBuildProjectDirectory)\..\..\artifacts\win81-x64\stage2\sdk</OutDir>
-    <OutDir>$(MSBuildProjectDirectory)\..\..\artifacts\win81-x64\intermediate</OutDir>
+    <IntermediateOutputPath>$(MSBuildProjectDirectory)\..\..\artifacts\win81-x64\intermediate</IntermediateOutputPath>
   </PropertyGroup>
   <!-- populates item group FilesToSign with the list of files to sign -->
   <Target Name="GetFilesToSignItems">
