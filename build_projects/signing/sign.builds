@@ -7,7 +7,8 @@
   <Import Project="$(MSBuildProjectDirectory)\..\..\build_tools\MicroBuild.Core.targets" />
   <UsingTask AssemblyFile="$(BuildToolsTaskDir)Microsoft.DotNet.Build.Tasks.dll" TaskName="ReadSigningRequired" />
   <PropertyGroup>
-    <OutDir>$(MSBuildProjectDirectory)\..\..\artifacts\win10-x64\stage2\sdk</OutDir>
+    <OutDir>$(MSBuildProjectDirectory)\..\..\artifacts\win81-x64\stage2\sdk</OutDir>
+    <OutDir>$(MSBuildProjectDirectory)\..\..\artifacts\win81-x64\intermediate</OutDir>
   </PropertyGroup>
   <!-- populates item group FilesToSign with the list of files to sign -->
   <Target Name="GetFilesToSignItems">
