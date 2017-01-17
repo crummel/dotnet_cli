@@ -20,7 +20,7 @@
           Condition="'$(SkipSigning)' != 'true' and '$(SignType)' != 'oss'"
           DependsOnTargets="GetFilesToSignItems">
     <PropertyGroup>
-      <BinariesDirectory>$(MSBuildProjectDirectory)\..\..\artifacts\win10-x64\stage2\sdk</BinariesDirectory>
+      <OutDir>$(BinDir)</OutDir>
     </PropertyGroup>
     <Message Text="Signing files: @(SignMarkerFile)" />
     <CallTarget Targets="SignFiles" />
