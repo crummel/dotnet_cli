@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildProjectDirectory)\..\..\dir.props" />
+  <Import Project="$(MSBuildProjectDirectory)\..\..\build_tools\sign.targets" />
   <Import Project="$(MSBuildProjectDirectory)\..\..\build_tools\Build.Common.props" />
   <Import Project="$(MSBuildProjectDirectory)\..\..\build_tools\MicroBuild.Core.props" />
   <Import Project="$(MSBuildProjectDirectory)\..\..\build_tools\MicroBuild.Core.targets" />
-  <Import Project="$(MSBuildProjectDirectory)\..\..\build_tools\sign.targets" />
   <UsingTask AssemblyFile="$(BuildToolsTaskDir)Microsoft.DotNet.Build.Tasks.dll" TaskName="ReadSigningRequired" />
   <!-- populates item group FilesToSign with the list of files to sign -->
   <Target Name="GetFilesToSignItems">
