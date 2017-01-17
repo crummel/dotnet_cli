@@ -114,7 +114,7 @@
     </ItemGroup>
   </Target>
 
-  <Target Name="SignBundle" DependsOnTargets="GetSignBundleFiles">
+  <Target Name="SignCliBundle" DependsOnTargets="GetSignBundleFiles">
     <CallTarget Targets="SignFiles" />
   </Target>
 
@@ -127,5 +127,37 @@
     </ItemGroup>
   </Target>
 
+  <Target Name="BeforeBuild" BeforeTargets="SignFiles">
+    <HandleAssemblyResolve SearchPath="$(RepoRoot)\build_tools" />
+  </Target>
+  <UsingTask TaskName="HandleAssemblyResolve" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <SearchPath ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Reflection" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+AppDomain.CurrentDomain.AssemblyResolve += (sender, e) => 
+{ 
+  var assemblySearchPath = Path.Combine(SearchPath, e.Name.Split(',')[0] + ".dll");
+  Console.WriteLine("Searching " + assemblySearchPath);
+  if (File.Exists(assemblySearchPath)) 
+  {
+    Console.WriteLine("Found");
+    return Assembly.LoadFrom(assemblySearchPath);
+  }
+  else
+  {
+    Console.WriteLine("Not found");
+  }
+  return null;
+};
+]]>
+      </Code>
+    </Task>
+  </UsingTask>
 
 </Project>
