@@ -6,6 +6,9 @@
   <Import Project="$(MSBuildProjectDirectory)\..\..\build_tools\MicroBuild.Core.props" />
   <Import Project="$(MSBuildProjectDirectory)\..\..\build_tools\MicroBuild.Core.targets" />
   <UsingTask AssemblyFile="$(BuildToolsTaskDir)Microsoft.DotNet.Build.Tasks.dll" TaskName="ReadSigningRequired" />
+  <PropertyGroup>
+    <OutDir>$(MSBuildProjectDirectory)\..\..\artifacts\win10-x64\stage2\sdk</OutDir>
+  </PropertyGroup>
   <!-- populates item group FilesToSign with the list of files to sign -->
   <Target Name="GetFilesToSignItems">
     <!-- read all of the marker files and populate the FilesToSign item group -->
@@ -19,9 +22,6 @@
   <Target Name="Build"
           Condition="'$(SkipSigning)' != 'true' and '$(SignType)' != 'oss'"
           DependsOnTargets="GetFilesToSignItems">
-    <PropertyGroup>
-      <OutDir>$(MSBuildProjectDirectory)\..\..\artifacts\win10-x64\stage2\sdk</OutDir>
-    </PropertyGroup>
     <Message Text="Signing files: @(SignMarkerFile)" />
     <CallTarget Targets="SignFiles" />
     <!-- now that the files have been signed delete the marker files -->
