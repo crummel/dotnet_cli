@@ -64,7 +64,7 @@
       <Output TaskParameter="BranchName" PropertyName="BranchName" />
     </GenerateBuildVersionInfo>
 
-    <GenerateNuGetPackagesArchiveVersion RepoRoot="$(RepoRoot)">
+    <GenerateNuGetPackagesArchiveVersion RepoRoot="$(RepoRoot)" Condition="'$(SkipMsBuild15Projects)' != 'True'">
       <Output TaskParameter="Version" PropertyName="NuGetPackagesArchiveVersion"/>
     </GenerateNuGetPackagesArchiveVersion>
 
