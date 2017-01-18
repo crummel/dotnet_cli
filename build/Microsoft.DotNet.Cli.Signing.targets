@@ -18,7 +18,7 @@
     <CallTarget Targets="SignFiles" />
   </Target>
   
-  <Target Name="GetPostCompileSignFiles" DependsOnTargets="InitializeCommonProps">
+  <Target Name="GetPostCompileSignFiles" DependsOnTargets="Init">
     <ItemGroup>
       <!-- External files -->
       <!--<FilesToSign Include="$(OutputDirectory)sdk/**/Newtonsoft.Json.dll">
@@ -88,7 +88,7 @@
     <CallTarget Targets="SignFiles" />
   </Target>
 
-  <Target Name="GetSignPackagesFiles" DependsOnTargets="InitializeCommonProps">
+  <Target Name="GetSignPackagesFiles" DependsOnTargets="Init">
     <ItemGroup>
       <FilesToSign Remove="*" />
       <FilesToSign Include="$(PackagesDirectory)/**/*.msi">
@@ -104,7 +104,7 @@
     <CallTarget Targets="SignFiles" />
   </Target>
 
-  <Target Name="GetSignEngineFiles" DependsOnTargets="InitializeCommonProps">
+  <Target Name="GetSignEngineFiles" DependsOnTargets="Init">
     <ItemGroup>
       <FilesToSign Remove="*" />
       <FilesToSign Include="$(PackagesDirectory)/**/*engine.exe">
@@ -117,7 +117,7 @@
     <CallTarget Targets="SignFiles" />
   </Target>
 
-  <Target Name="GetSignBundleFiles" DependsOnTargets="InitializeCommonProps">
+  <Target Name="GetSignBundleFiles" DependsOnTargets="Init">
     <ItemGroup>
       <FilesToSign Remove="*" />
       <FilesToSign Include="$(PackagesDirectory)/**/*.exe">
