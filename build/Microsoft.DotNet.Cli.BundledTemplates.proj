@@ -1,4 +1,4 @@
-<Project ToolsVersion="15.0" DefaultTargets="CopyTemplateToOutput">
+<Project ToolsVersion="15.0" DefaultTargets="CopyTemplateToOutput" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), dir.props))\dir.props" />
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), dir.tasks))\dir.tasks" />
 
