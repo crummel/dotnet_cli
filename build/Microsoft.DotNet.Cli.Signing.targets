@@ -123,7 +123,7 @@
     </ItemGroup>
   </Target>
 
-  <Target Name="BeforeBuild" BeforeTargets="GetCurrentRuntimeInformation">
+  <Target Name="BeforeBuild" BeforeTargets="InitializeCommonProps">
     <HandleAssemblyResolve SearchPath="$(BuildToolsTaskDir)" />
   </Target>
   <UsingTask TaskName="HandleAssemblyResolve" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
