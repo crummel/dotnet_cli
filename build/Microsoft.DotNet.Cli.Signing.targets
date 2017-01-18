@@ -90,7 +90,6 @@
 
   <Target Name="GetSignPackagesFiles" DependsOnTargets="Init">
     <ItemGroup>
-      <FilesToSign Remove="*" />
       <FilesToSign Include="$(PackagesDirectory)/**/*.msi">
         <Authenticode>$(InternalCertificateId)</Authenticode>
       </FilesToSign>
@@ -106,7 +105,6 @@
 
   <Target Name="GetSignEngineFiles" DependsOnTargets="Init">
     <ItemGroup>
-      <FilesToSign Remove="*" />
       <FilesToSign Include="$(PackagesDirectory)/**/*engine.exe">
         <Authenticode>$(InternalCertificateId)</Authenticode>
       </FilesToSign>
@@ -119,11 +117,43 @@
 
   <Target Name="GetSignBundleFiles" DependsOnTargets="Init">
     <ItemGroup>
-      <FilesToSign Remove="*" />
       <FilesToSign Include="$(PackagesDirectory)/**/*.exe">
         <Authenticode>$(InternalCertificateId)</Authenticode>
       </FilesToSign>
     </ItemGroup>
   </Target>
+
+  <Target Name="BeforeBuild" BeforeTargets="GetPostCompileSignFiles;GetSignPackagesFiles;GetSignEngineFiles;GetSignBundleFiles">
+    <HandleAssemblyResolve SearchPath="$(BuildToolsTaskDir)" />
+  </Target>
+  <UsingTask TaskName="HandleAssemblyResolve" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <SearchPath ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Reflection" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+AppDomain.CurrentDomain.AssemblyResolve += (sender, e) => 
+{ 
+  var assemblySearchPath = Path.Combine(SearchPath, e.Name.Split(',')[0] + ".dll");
+  Console.WriteLine("Searching " + assemblySearchPath);
+  if (File.Exists(assemblySearchPath)) 
+  {
+    Console.WriteLine("Found");
+    return Assembly.LoadFrom(assemblySearchPath);
+  }
+  else
+  {
+    Console.WriteLine("Not found");
+  }
+  return null;
+};
+]]>
+      </Code>
+    </Task>
+  </UsingTask>
 
 </Project>
