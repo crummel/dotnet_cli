@@ -123,7 +123,7 @@
     </ItemGroup>
   </Target>
 
-  <Target Name="BeforeBuild" BeforeTargets="GetPostCompileSignFiles;GetSignPackagesFiles;GetSignEngineFiles;GetSignBundleFiles">
+  <Target Name="BeforeBuild" BeforeTargets="GetCurrentRuntimeInformation">
     <HandleAssemblyResolve SearchPath="$(BuildToolsTaskDir)" />
   </Target>
   <UsingTask TaskName="HandleAssemblyResolve" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
