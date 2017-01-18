@@ -124,7 +124,7 @@
   </Target>
 
   <Target Name="BeforeBuild" BeforeTargets="InitializeCommonProps" Condition="'$(SkipMsBuild15Projects)' == 'True'">
-    <HandleAssemblyResolve SearchPath="$(BuildToolsTaskDir)" />
+    <HandleAssemblyResolve SearchPath="$(RepoRoot)\build_tools" />
   </Target>
   <UsingTask TaskName="HandleAssemblyResolve" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" Condition="'$(SkipMsBuild15Projects)' == 'True'" >
     <ParameterGroup>
