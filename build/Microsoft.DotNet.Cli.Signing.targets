@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="Microsoft.DotNet.Cli.tasks" />
-  <Import Project="Microsoft.DotNet.Cli.Prepare.targets" />
-
   <!-- this will be overriden if we're building with MicroBuild -->
   <Target Name="SignFiles">
     <Message Text="Fake sign target.  Would sign: @(FilesToSign)" />
