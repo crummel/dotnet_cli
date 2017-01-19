@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="../build_tools/Microsoft.Common.CurrentVersion.targets" />
   <!-- this will be overriden if we're building with MicroBuild -->
   <Target Name="SignFiles">
     <Message Text="Fake sign target.  Would sign: @(FilesToSign)" />
+  </Target>
+
+  <Target Name="SetSignFilesOutDir" BeforeTargets="SignFiles">
+    <PropertyGroup>
+      <OutDir Condition="'$(OutDir)' == ''">$(OutputDirectory)</OutDir>
+    </PropertyGroup>
   </Target>
 
   <Import Project="$(RepoRoot)\build_tools\MicroBuild.Core.props" />
@@ -15,9 +22,6 @@
 
   <Target Name="PostCompileSign" DependsOnTargets="GetPostCompileSignFiles">
     <Message Text="OutDir $(OutDir) InternalCertificateId $(InternalCertificateId) ExternalCertificateId $(ExternalCertificateId)" />
-    <PropertyGroup>
-      <OutDir Condition="'$(OutDir)' == ''">$(OutputDirectory)</OutDir>
-    </PropertyGroup>
     <Message Text="OutDir $(OutDir) InternalCertificateId $(InternalCertificateId) ExternalCertificateId $(ExternalCertificateId)" />
     <CallTarget Targets="SignFiles" />
   </Target>
@@ -96,9 +100,6 @@
   </Target>
 
   <Target Name="GetSignPackagesFiles" DependsOnTargets="Init">
-    <PropertyGroup>
-      <OutDir Condition="'$(OutDir)' == ''">$(OutputDirectory)</OutDir>
-    </PropertyGroup>
     <ItemGroup>
       <FilesToSign Include="$(PackagesDirectory)/**/*.msi">
         <Authenticode>$(InternalCertificateId)</Authenticode>
@@ -114,9 +115,6 @@
   </Target>
 
   <Target Name="GetSignEngineFiles" DependsOnTargets="Init">
-    <PropertyGroup>
-      <OutDir Condition="'$(OutDir)' == ''">$(OutputDirectory)</OutDir>
-    </PropertyGroup>
     <ItemGroup>
       <FilesToSign Include="$(PackagesDirectory)/**/*engine.exe">
         <Authenticode>$(InternalCertificateId)</Authenticode>
@@ -129,9 +127,6 @@
   </Target>
 
   <Target Name="GetSignBundleFiles" DependsOnTargets="Init">
-    <PropertyGroup>
-      <OutDir Condition="'$(OutDir)' == ''">$(OutputDirectory)</OutDir>
-    </PropertyGroup>
     <ItemGroup>
       <FilesToSign Include="$(PackagesDirectory)/**/*.exe">
         <Authenticode>$(InternalCertificateId)</Authenticode>
