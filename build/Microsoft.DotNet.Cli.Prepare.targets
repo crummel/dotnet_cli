@@ -30,7 +30,7 @@
       <IsDesktopAvailable>False</IsDesktopAvailable>
       <IsDesktopAvailable Condition=" '$(OSName)' == 'win' ">True</IsDesktopAvailable>
       <DotNetPath>$(Stage0Directory)</DotNetPath>
-      <BaseOutputDirectory>$(RepoRoot)/artifacts/$(Rid)</BaseOutputDirectory>
+      <BaseOutputDirectory>$(RepoRoot)artifacts/$(Rid)</BaseOutputDirectory>
       <ToolsOutputDirectory>$(BaseOutputDirectory)/tools</ToolsOutputDirectory>
       <Stage1Directory>$(BaseOutputDirectory)/stage1</Stage1Directory>
       <Stage1SymbolsDirectory>$(BaseOutputDirectory)/stage1symbols</Stage1SymbolsDirectory>
