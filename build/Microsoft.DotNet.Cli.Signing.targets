@@ -9,7 +9,6 @@
   <Import Project="$(RepoRoot)\build_tools\MicroBuild.Core.targets" />
 
   <PropertyGroup>
-    <OutDir Condition="'$(OutDir)' == ''">$(OutputDirectory)</OutDir>
     <InternalCertificateId Condition="'$(InternalCertificateId)' == ''">400</InternalCertificateId>
     <ExternalCertificateId Condition="'$(ExternalCertificateId)' == ''">135020001</ExternalCertificateId>
   </PropertyGroup>
@@ -17,13 +16,16 @@
   <Target Name="PostCompileSign" DependsOnTargets="GetPostCompileSignFiles">
     <Message Text="OutDir $(OutDir) InternalCertificateId $(InternalCertificateId) ExternalCertificateId $(ExternalCertificateId)" />
     <PropertyGroup>
-    <OutDir Condition="'$(OutDir)' == ''">$(OutputDirectory)</OutDir>
+      <OutDir Condition="'$(OutDir)' == ''">$(OutputDirectory)</OutDir>
     </PropertyGroup>
     <Message Text="OutDir $(OutDir) InternalCertificateId $(InternalCertificateId) ExternalCertificateId $(ExternalCertificateId)" />
     <CallTarget Targets="SignFiles" />
   </Target>
   
   <Target Name="GetPostCompileSignFiles" DependsOnTargets="Init">
+    <PropertyGroup>
+      <OutDir Condition="'$(OutDir)' == ''">$(OutputDirectory)</OutDir>
+    </PropertyGroup>
     <ItemGroup>
       <!-- External files -->
       <!--<FilesToSign Include="$(OutputDirectory)sdk/**/Newtonsoft.Json.dll">
@@ -94,6 +96,9 @@
   </Target>
 
   <Target Name="GetSignPackagesFiles" DependsOnTargets="Init">
+    <PropertyGroup>
+      <OutDir Condition="'$(OutDir)' == ''">$(OutputDirectory)</OutDir>
+    </PropertyGroup>
     <ItemGroup>
       <FilesToSign Include="$(PackagesDirectory)/**/*.msi">
         <Authenticode>$(InternalCertificateId)</Authenticode>
@@ -109,6 +114,9 @@
   </Target>
 
   <Target Name="GetSignEngineFiles" DependsOnTargets="Init">
+    <PropertyGroup>
+      <OutDir Condition="'$(OutDir)' == ''">$(OutputDirectory)</OutDir>
+    </PropertyGroup>
     <ItemGroup>
       <FilesToSign Include="$(PackagesDirectory)/**/*engine.exe">
         <Authenticode>$(InternalCertificateId)</Authenticode>
@@ -121,6 +129,9 @@
   </Target>
 
   <Target Name="GetSignBundleFiles" DependsOnTargets="Init">
+    <PropertyGroup>
+      <OutDir Condition="'$(OutDir)' == ''">$(OutputDirectory)</OutDir>
+    </PropertyGroup>
     <ItemGroup>
       <FilesToSign Include="$(PackagesDirectory)/**/*.exe">
         <Authenticode>$(InternalCertificateId)</Authenticode>
