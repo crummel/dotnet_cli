@@ -25,7 +25,9 @@
   </Target>
   
   <Target Name="GetPostCompileSignFiles" DependsOnTargets="Init">
-    <Message Text="adding $(OutputDirectory)sdk/**/csc.exe" />
+    <PropertyGroup>
+      <OutDir Condition="'$(OutDir)' == ''">$(OutputDirectory)</OutDir>
+    </PropertyGroup>
     <ItemGroup>
       <!-- External files -->
       <!--<FilesToSign Include="$(OutputDirectory)sdk/**/Newtonsoft.Json.dll">
