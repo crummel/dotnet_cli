@@ -20,19 +20,12 @@
     <ExternalCertificateId Condition="'$(ExternalCertificateId)' == ''">135020001</ExternalCertificateId>
   </PropertyGroup>
 
-  <Target Name="PostCompileSign" DependsOnTargets="PostCompileSign1;PostCompileSign2" />
-
-  <Target Name="PostCompileSign1" DependsOnTargets="GetPostCompileSignFiles1">
-    <Message Text="OutDir $(OutDir) IntermediateOutputPath $(IntermediateOutputPath) InternalCertificateId $(InternalCertificateId) ExternalCertificateId $(ExternalCertificateId)" />
-    <CallTarget Targets="SignFiles" />
-  </Target>
-
-  <Target Name="PostCompileSign2" DependsOnTargets="GetPostCompileSignFiles2">
-    <Message Text="OutDir $(OutDir) IntermediateOutputPath $(IntermediateOutputPath) InternalCertificateId $(InternalCertificateId) ExternalCertificateId $(ExternalCertificateId)" />
+  <Target Name="PostCompileSign" DependsOnTargets="GetPostCompileSignFiles">
     <CallTarget Targets="SignFiles" />
   </Target>
   
-  <Target Name="GetPostCompileSignFiles1" DependsOnTargets="Init">
+  <Target Name="GetPostCompileSignFiles" DependsOnTargets="Init">
+    <Message Text="adding $(OutputDirectory)sdk/**/csc.exe" />
     <ItemGroup>
       <!-- External files -->
       <!--<FilesToSign Include="$(OutputDirectory)sdk/**/Newtonsoft.Json.dll">
@@ -85,7 +78,11 @@
     </ItemGroup>
   </Target>
 
-  <Target Name="GetPostCompileSignFiles2" DependsOnTargets="Init">
+  <Target Name="SignNuPkgContents" DependsOnTargets="GetNuPkgContentsFiles">
+    <CallTarget Targets="SignFiles" />
+  </Target>
+
+  <Target Name="GetNuPkgContentsFiles" DependsOnTargets="Init">
     <PropertyGroup>
       <OutDir>$(RepoRoot)/src/Microsoft.DotNet.Cli.Utils</OutDir>
     </PropertyGroup>
