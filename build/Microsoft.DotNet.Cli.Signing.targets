@@ -8,7 +8,7 @@
   <Target Name="SetSignFilesOutDir" BeforeTargets="SignFiles">
     <PropertyGroup>
       <OutDir Condition="'$(OutDir)' == ''">$(OutputDirectory)</OutDir>
-      <IntermediateOutputPath Condition="'$(OutDir)' == ''">$(IntermediateDirectory)</IntermediateOutputPath>
+      <IntermediateOutputPath Condition="'$(IntermediateOutputPath)' == ''">$(IntermediateDirectory)</IntermediateOutputPath>
     </PropertyGroup>
   </Target>
 
