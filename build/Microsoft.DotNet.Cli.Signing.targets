@@ -15,9 +15,11 @@
   </PropertyGroup>
 
   <Target Name="PostCompileSign" DependsOnTargets="GetPostCompileSignFiles">
-    <Message Text="OutDir $(OutDir) InternalCertificateId $(InternalCertificateId) ExternalCertificateId $(ExternalCertificateId)">
+    <Message Text="OutDir $(OutDir) InternalCertificateId $(InternalCertificateId) ExternalCertificateId $(ExternalCertificateId)" />
+    <PropertyGroup>
     <OutDir Condition="'$(OutDir)' == ''">$(OutputDirectory)</OutDir>
-    <Message Text="OutDir $(OutDir) InternalCertificateId $(InternalCertificateId) ExternalCertificateId $(ExternalCertificateId)">
+    </PropertyGroup>
+    <Message Text="OutDir $(OutDir) InternalCertificateId $(InternalCertificateId) ExternalCertificateId $(ExternalCertificateId)" />
     <CallTarget Targets="SignFiles" />
   </Target>
   
