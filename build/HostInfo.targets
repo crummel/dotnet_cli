@@ -3,17 +3,17 @@
           Condition=" !Exists('$(HostInfoProps)') "
           DependsOnTargets="BuildDotnetCliBuildFramework">
 
-    <GetCurrentRuntimeInformation>
+    <!--<GetCurrentRuntimeInformation>
       <Output TaskParameter="Rid" PropertyName="HostRid" />
       <Output TaskParameter="OSName" PropertyName="HostOSName" />
-    </GetCurrentRuntimeInformation>
+    </GetCurrentRuntimeInformation>-->
 
     <PropertyGroup>
       <HostInfoPropsContent>
 &lt;Project ToolsVersion=&quot;15.0&quot;&gt;
     &lt;PropertyGroup&gt;
-        &lt;HostRid&gt;$(HostRid)&lt;/HostRid&gt;
-        &lt;HostOSName&gt;$(HostOSName)&lt;/HostOSName&gt;
+        &lt;HostRid&gt;rhel.7-x64&lt;/HostRid&gt;
+        &lt;HostOSName&gt;rhel&lt;/HostOSName&gt;
     &lt;/PropertyGroup&gt;
 &lt;/Project&gt;
       </HostInfoPropsContent>
