@@ -2,13 +2,19 @@
   <Target Name="WriteBuildInfoProps"
           DependsOnTargets="BuildDotnetCliBuildFramework">
 
-    <GetCurrentRuntimeInformation>
+<!--    <GetCurrentRuntimeInformation>
       <Output TaskParameter="Rid" PropertyName="HostRid" />
       <Output TaskParameter="OSName" PropertyName="HostOSName" />
       <Output TaskParameter="OSPlatform" PropertyName="HostOSPlatform" />
     </GetCurrentRuntimeInformation>
-
+ -->
     <PropertyGroup>
+      <HostRid>rhel.7-x64</HostRid>
+      <HostOSName>rhel</HostOSName>
+      <HostOSPlatform>Linux</HostOSPlatform>
+      <Rid>rhel.7-x64</Rid>
+      <OSName>rhel</OSName>
+      <OSPlatform>Linux</OSPlatform>
       <IsLinux Condition = " '$(HostOSName)' != 'win' AND '$(HostOSName)' != 'osx' ">True</IsLinux>
       <Rid Condition=" '$(Rid)' == '' AND '$(IsLinux)' != 'True' ">$(HostRid)</Rid>
       <Architecture Condition=" '$(Architecture)' == '' AND '$(IsLinux)' != 'True' ">x64</Architecture>
